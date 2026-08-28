@@ -30,11 +30,7 @@ mention:
   enabled: true
   text: "<#34ebd8>@<player>" # replacement
 
-  sound:
-    name: "block.note_block.pling" # keep it empty to disable sound
-    volume: 1.0
-    pitch: 2.0
-
+  sound: "block.note_block.pling" # keep it empty to disable sound
   actionbar: "<#34ebd8><player> <white>mentioned you in chat!" # keep it empty to disable actionbar
   message: "<prefix> <#34ebd8><player> <white>mentioned you in chat!" # keep it empty to disable message
 

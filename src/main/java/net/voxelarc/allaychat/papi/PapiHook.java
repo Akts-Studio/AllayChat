@@ -35,20 +35,30 @@ public class PapiHook extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onPlaceholderRequest(Player player, @NotNull String params) {
-        if (player == null) return null;
+        if (player == null)
+            return null;
 
         ChatUser user = plugin.getUserManager().getUser(player.getUniqueId());
-        if (user == null) return null;
+        if (user == null)
+            return null;
 
         return switch (params.toLowerCase()) {
             case "ignored_players" -> String.join(", ", user.getIgnoredPlayers());
-            case "msg_status" -> String.valueOf(user.isMsgEnabled());
-            case "staff_status" -> String.valueOf(user.isStaffEnabled());
-            case "spy_status" -> String.valueOf(user.isSpyEnabled());
-            case "mention_status" -> String.valueOf(user.isMentionsEnabled());
-            case "chat_status" -> String.valueOf(user.isChatEnabled());
-            case "chat_mute_status" -> String.valueOf(plugin.getChatManager().isChatMuted());
+            case "msg_status" -> getStatus(user.isMsgEnabled());
+            case "staff_status" -> getStatus(user.isStaffEnabled());
+            case "spy_status" -> getStatus(user.isSpyEnabled());
+            case "mention_status" -> getStatus(user.isMentionsEnabled());
+            case "chat_status" -> getStatus(user.isChatEnabled());
+            case "chat_mute_status" -> getStatus(plugin.getChatManager().isChatMuted());
             default -> "Unknown Placeholder";
         };
+    }
+
+    private String getStatus(boolean status) {
+        if (status) {
+            return plugin.getConfig().getString("placeholders.status.enabled", "&aAçık");
+        } else {
+            return plugin.getConfig().getString("placeholders.status.disabled", "&cKapalı");
+        }
     }
 }

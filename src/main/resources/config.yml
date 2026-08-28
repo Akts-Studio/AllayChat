@@ -19,3 +19,8 @@ database:
   idle-timeout: 10000
   pool-size: 20
   min-idle: 5
+
+placeholders:
+  status:
+    enabled: "&aAçık"
+    disabled: "&cKapalı"
